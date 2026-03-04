@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>호준이 설명서</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --warm: #FFF8F0;
+    --peach: #FFE8D6;
+    --coral: #FF8A65;
+    --deep: #5D4037;
+    --soft-green: #A5D6A7;
+    --sky: #81D4FA;
+    --lavender: #CE93D8;
+    --card-shadow: 0 2px 16px rgba(93,64,55,0.08);
+    --radius: 20px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--warm);
+    color: var(--deep);
+    line-height: 1.8;
+    -webkit-font-smoothing: antialiased;
+  }
+  .hero {
+    text-align: center;
+    padding: 60px 24px 40px;
+    background: linear-gradient(180deg, #FFF0E0 0%, var(--warm) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: var(--peach);
+    border-radius: 50%;
+    opacity: 0.5;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -20px; left: -30px;
+    width: 140px; height: 140px;
+    background: var(--sky);
+    border-radius: 50%;
+    opacity: 0.2;
+  }
+  .hero-emoji {
+    font-size: 64px;
+    margin-bottom: 12px;
+    animation: wave 2s ease-in-out infinite;
+  }
+  @keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(12deg); }
+    75% { transform: rotate(-8deg); }
+  }
+  .hero h1 {
+    font-family: 'Gaegu', cursive;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--deep);
+    position: relative;
+    z-index: 1;
+  }
+  .hero .subtitle {
+    font-size: 1rem;
+    color: #8D6E63;
+    margin-top: 8px;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+  }
+  .content {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 20px 80px;
+  }
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Gaegu', cursive;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--deep);
+    margin: 48px 0 20px;
+  }
+  .section-label .dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .intro-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: var(--card-shadow);
+    border-left: 4px solid var(--coral);
+  }
+  .intro-card p {
+    font-size: 0.95rem;
+    margin-bottom: 12px;
+    color: #5D4037;
+  }
+  .intro-card p:last-child { margin-bottom: 0; }
+  .highlight {
+    background: linear-gradient(transparent 60%, #FFE0B2 60%);
+    font-weight: 500;
+  }
+  .why-card {
+    background: linear-gradient(135deg, #FFF8E1, #FFF3E0);
+    border-radius: var(--radius);
+    padding: 24px;
+    font-size: 0.9rem;
+    color: #6D4C41;
+    text-align: center;
+    margin-bottom: 8px;
+    border: 1.5px dashed #FFCC80;
+  }
+  .profile-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    box-shadow: var(--card-shadow);
+    text-align: center;
+  }
+  .profile-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sky), var(--lavender));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    margin: 0 auto 16px;
+  }
+  .profile-card h2 {
+    font-family: 'Gaegu', cursive;
+    font-size: 1.8rem;
+    margin-bottom: 4px;
+  }
+  .profile-card .age {
+    font-size: 0.88rem;
+    color: #8D6E63;
+    margin-bottom: 16px;
+  }
+  .profile-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .profile-tags span {
+    background: #FFF3E0;
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--deep);
+  }
+  .profile-personality {
+    font-size: 0.9rem;
+    color: #6D4C41;
+    line-height: 1.7;
+  }
+  .scene-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .scene-card {
+    background: white;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: transform 0.2s;
+  }
+  .scene-card:hover { transform: translateY(-2px); }
+  .scene-icon {
+    font-size: 2.4rem;
+    flex-shrink: 0;
+    width: 56px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 16px;
+  }
+  .scene-body h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+    color: var(--deep);
+  }
+  .scene-body .situation {
+    font-size: 0.88rem;
+    color: #8D6E63;
+    margin-bottom: 8px;
+    padding-left: 12px;
+    border-left: 3px solid var(--peach);
+  }
+  .scene-body .tip {
+    font-size: 0.88rem;
+    color: var(--deep);
+    background: #FFF8E1;
+    border-radius: 12px;
+    padding: 10px 14px;
+  }
+  .scene-body .tip::before {
+    content: '💡';
+    margin-right: 6px;
+  }
+  .bg-green { background: #E8F5E9; }
+  .bg-blue { background: #E3F2FD; }
+  .bg-orange { background: #FFF3E0; }
+  .bg-purple { background: #F3E5F5; }
+  .bg-pink { background: #FCE4EC; }
+  .bg-yellow { background: #FFFDE7; }
+  .bg-teal { background: #E0F2F1; }
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 8px;
+  }
+  .do-card, .dont-card {
+    border-radius: 16px;
+    padding: 20px 16px;
+    font-size: 0.85rem;
+  }
+  .do-card {
+    background: #E8F5E9;
+    border: 1.5px solid #A5D6A7;
+  }
+  .dont-card {
+    background: #FBE9E7;
+    border: 1.5px solid #FFAB91;
+  }
+  .do-card h4, .dont-card h4 {
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+  .do-card li, .dont-card li {
+    list-style: none;
+    padding: 4px 0;
+    line-height: 1.6;
+  }
+  .do-card li::before { content: '✅ '; }
+  .dont-card li::before { content: '🙅 '; }
+  .guide-box {
+    background: white;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 12px;
+  }
+  .guide-box h3 {
+    font-family: 'Gaegu', cursive;
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--deep);
+  }
+  .guide-box .guide-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    font-size: 0.9rem;
+  }
+  .guide-box .guide-item:last-child { margin-bottom: 0; }
+  .guide-num {
+    background: var(--coral);
+    color: white;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .voice-card {
+    background: linear-gradient(135deg, #E3F2FD, #F3E5F5);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align: center;
+    margin: 24px 0;
+    position: relative;
+  }
+  .voice-card .big-quote {
+    font-size: 3rem;
+    opacity: 0.2;
+    position: absolute;
+    top: 8px;
+    left: 20px;
+    font-family: Georgia, serif;
+  }
+  .voice-card p {
+    font-family: 'Gaegu', cursive;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--deep);
+    position: relative;
+    z-index: 1;
+  }
+  .voice-card .speaker {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: #8D6E63;
+    margin-top: 8px;
+  }
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .faq-item {
+    background: white;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+  }
+  .faq-q {
+    padding: 16px 20px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .faq-q:hover { background: #FFF8F0; }
+  .faq-q .arrow {
+    transition: transform 0.3s;
+    font-size: 1.2rem;
+    color: #BCAAA4;
+  }
+  .faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    font-size: 0.88rem;
+    color: #6D4C41;
+    padding: 0 20px;
+    line-height: 1.8;
+  }
+  .faq-item.open .faq-a {
+    max-height: 300px;
+    padding: 0 20px 16px;
+  }
+  .qna-section {
+    background: white;
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    box-shadow: var(--card-shadow);
+    margin-top: 24px;
+  }
+  .qna-section h3 {
+    font-family: 'Gaegu', cursive;
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+  }
+  .qna-section .qna-desc {
+    font-size: 0.85rem;
+    color: #8D6E63;
+    margin-bottom: 16px;
+  }
+  .qna-section textarea {
+    width: 100%;
+    border: 2px solid var(--peach);
+    border-radius: 14px;
+    padding: 14px 16px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.9rem;
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+    transition: border-color 0.2s;
+    background: #FFFAF5;
+  }
+  .qna-section textarea:focus { border-color: var(--coral); }
+  .qna-section textarea::placeholder { color: #BCAAA4; }
+  .qna-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    padding: 12px 28px;
+    background: var(--coral);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .qna-btn:hover { background: #FF7043; transform: translateY(-1px); }
+  .qna-btn:active { transform: scale(0.97); }
+  .qna-notice { font-size: 0.78rem; color: #BCAAA4; margin-top: 10px; }
+  .qna-success {
+    display: none;
+    padding: 16px;
+    background: #E8F5E9;
+    border-radius: 14px;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #2E7D32;
+    margin-top: 12px;
+  }
+  .footer {
+    text-align: center;
+    padding: 40px 20px 60px;
+    font-size: 0.82rem;
+    color: #BCAAA4;
+  }
+  .footer .heart {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+  @media (max-width: 500px) {
+    .hero h1 { font-size: 1.7rem; }
+    .do-dont { grid-template-columns: 1fr; }
+    .scene-card { flex-direction: column; align-items: center; text-align: center; }
+    .scene-body .situation { border-left: none; padding-left: 0; border-top: 3px solid var(--peach); padding-top: 8px; }
+  }
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-emoji">👋</div>
+  <h1>호준이 설명서</h1>
+  <p class="subtitle">궁금했지만 물어보기 어려웠던 것들,<br>여기서 편하게 알아가세요</p>
+</div>
+
+<div class="content">
+
+  <!-- ① 왜 만들었는지 -->
+  <div class="why-card fade-up">
+    매번 말로 설명하려니 빠뜨리는 것도 많고, 듣는 분도 부담스러울까 봐 이렇게 정리했어요.<br>
+    한번 읽어주시면 호준이를 이해하는 데 큰 도움이 됩니다 🙏
+  </div>
+
+  <!-- ② 아이 소개 -->
+  <div class="section-label">
+    <span class="dot" style="background:var(--sky)"></span>
+    먼저 호준이를 소개할게요
+  </div>
+
+  <div class="profile-card fade-up">
+    <div class="profile-avatar">🧒</div>
+    <h2>호준</h2>
+    <div class="age">초등학생</div>
+    <div class="profile-tags">
+      <span>🎮 게임 좋아함</span>
+      <span>📺 유튜브 좋아함</span>
+      <span>💬 수다쟁이</span>
+      <span>👫 친구랑 대화 좋아함</span>
+    </div>
+    <div class="profile-personality">
+      말이 많고, 대화하는 걸 제일 좋아하는 아이예요.<br>
+      입버릇처럼 <strong>"나도 할 수 있어!"</strong>라고 말해요.<br>
+      <strong>같이 놀고, 함께하는 걸 정말 좋아해요.</strong><br>
+      휠체어를 타고 있지만, 호준이에겐 그게 일상이에요.
+    </div>
+  </div>
+
+  <!-- ③ 근육병이 뭐야 -->
+  <div class="section-label">
+    <span class="dot" style="background:var(--coral)"></span>
+    근육병이 뭐야?
+  </div>
+
+  <div class="intro-card fade-up">
+    <p>호준이는 <span class="highlight">근육병(근이영양증)</span>을 가지고 있어요.</p>
+    <p>쉽게 말하면, 근육이 조금씩 힘을 잃어가는 병이에요.<br>
+    뇌는 멀쩡하고, 생각도 감정도 또래 아이들과 똑같아요.<br>
+    다만 <span class="highlight">몸이 마음만큼 따라주지 않는 것</span>뿐이에요.</p>
+    <p>감기처럼 옮는 병이 아니고,<br>
+    부모가 잘못해서 생긴 것도 아니에요.<br>
+    그냥 태어날 때 유전자가 조금 다르게 세팅된 거예요.</p>
+  </div>
+
+  <!-- ④ 일상에서 보이는 모습 -->
+  <div class="section-label">
+    <span class="dot" style="background:var(--sky)"></span>
+    일상에서 이런 모습이 보여요
+  </div>
+
+  <div class="scene-grid">
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-blue">🏫</div>
+      <div class="scene-body">
+        <h3>교실 이동</h3>
+        <div class="situation">엘리베이터가 없는 곳은 혼자 갈 수 없어요. 계단은 산을 오르는 것과 같아요.</div>
+        <div class="tip">미리 동선을 알려주시면 스스로 계획할 수 있어요. "같이 가자!" 한마디면 충분해요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-green">🍽️</div>
+      <div class="scene-body">
+        <h3>급식 시간</h3>
+        <div class="situation">식판 들기, 국 옮기기 같은 게 어려울 수 있어요. 숟가락질은 가능하지만 피곤한 날은 느려져요.</div>
+        <div class="tip">식판 옮기는 것만 살짝 도와주시면 나머진 스스로 잘 해요. 기다려주는 것도 큰 도움이에요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-orange">⚽</div>
+      <div class="scene-body">
+        <h3>체육 시간</h3>
+        <div class="situation">달리기, 공 던지기 같은 활동은 참여가 어려워요. 하지만 빠지고 싶은 게 아니라 함께하고 싶어요.</div>
+        <div class="tip">심판, 기록, 응원단장 등 역할을 주시면 같이 참여하는 느낌을 받을 수 있어요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-purple">🚻</div>
+      <div class="scene-body">
+        <h3>화장실</h3>
+        <div class="situation">좁은 칸에 휠체어가 안 들어가요. 장애인 화장실이 어디 있는지 모를 때 난감해요.</div>
+        <div class="tip">장애인 화장실 위치를 처음에 한번 알려주시면 돼요. 그 뒤로는 알아서 잘 갈 수 있어요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-yellow">🎒</div>
+      <div class="scene-body">
+        <h3>무거운 것 들기</h3>
+        <div class="situation">교과서 여러 권, 물통, 미술 도구함 같은 것도 호준이에겐 꽤 무거워요. 양손에 뭔가 들고 이동하는 건 거의 불가능해요.</div>
+        <div class="tip">짝꿍이나 옆자리 친구가 자연스럽게 하나 들어주면 돼요. "이거 무겁지? 하나 줘!" 한마디면 충분해요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-blue">✏️</div>
+      <div class="scene-body">
+        <h3>바닥에 떨어진 물건 줍기</h3>
+        <div class="situation">연필이 떨어지면 허리를 숙여서 줍는 게 오래 걸려요. 휠체어에서 몸을 앞으로 기울이는 것 자체가 균형을 잃을 수 있어서 조심해야 해요.</div>
+        <div class="tip">옆에서 자연스럽게 주워주시면 좋아요. 호준이가 직접 줍고 싶어 하면 기다려주시는 것도 괜찮아요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-green">🥛</div>
+      <div class="scene-body">
+        <h3>물컵 들고 이동하기</h3>
+        <div class="situation">컵을 두 손으로 들고 걸으면 <strong>균형 자체가 무너져요.</strong> 물이 찰랑거리는 정도가 아니라, 몸의 중심이 흔들려서 넘어질 수 있어요. 국이나 수프를 들고 이동하는 건 거의 불가능해요.</div>
+        <div class="tip">물컵이나 국은 자리에서 받을 수 있게 해주시면 감사해요. 직접 옮기려다 균형을 잃는 게 가장 위험한 상황이에요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-purple">🧍</div>
+      <div class="scene-body">
+        <h3>서 있기 · 한발 서기 · 줄서기</h3>
+        <div class="situation">오래 서 있는 것 자체가 힘들어요. 조회, 줄서기, 한발 서기 같은 건 금방 흔들리고 넘어질 수 있어요. 갑자기 다리 힘이 풀리면서 주저앉기도 해요. 신발 갈아신을 때 벽 없으면 중심 잡기 어려워요.</div>
+        <div class="tip">서서 기다리는 상황에선 앉을 곳을 마련해주시거나, 벽 근처에 서게 해주시면 돼요. 체조도 앉아서 할 수 있는 동작으로 대체해주시면 좋아요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-yellow">🎲</div>
+      <div class="scene-body">
+        <h3>쉬는 시간 · 놀이</h3>
+        <div class="situation">뛰어다니는 놀이는 어렵지만, 호준이는 <strong>같이 놀고 함께하는 걸 정말 좋아해요.</strong> 보드게임, 카드, 수다, 핸드폰 게임 같은 건 누구보다 잘 어울려요.</div>
+        <div class="tip">호준이가 상황에 맞게 알아서 참여할 수 있어요. "같이 하자!" 라고 제안만 해주시면 나머지는 호준이가 알아서 맞춰요. 제안은 언제든지 환영이에요!</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-teal">🏠</div>
+      <div class="scene-body">
+        <h3>학원 · 방과후 이동</h3>
+        <div class="situation">학교 끝나고 학원이나 방과후 교실로 이동할 때, 경사로나 문턱이 문제가 돼요. 새로운 장소는 동선을 모르니까 처음이 가장 어려워요.</div>
+        <div class="tip">처음 한번만 같이 가주시거나 동선을 알려주시면 그 다음부터는 스스로 다닐 수 있어요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-blue">🌧️</div>
+      <div class="scene-body">
+        <h3>비 오는 날 · 미끄러운 바닥</h3>
+        <div class="situation">비 오는 날은 바닥이 미끄러워서 평소보다 훨씬 위험해요. 우산을 들면 한 손이 막혀서 균형 잡기가 더 어렵고요.</div>
+        <div class="tip">실내에서 젖은 바닥을 지날 때 한마디 알려주시면 돼요. 우산 대신 우비를 입히는 것도 방법이에요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-orange">🧥</div>
+      <div class="scene-body">
+        <h3>옷 입고 벗기 · 신발 갈아신기</h3>
+        <div class="situation">두꺼운 겨울옷 입고 벗기, 지퍼 올리기, 신발 갈아신기에 시간이 걸려요. 팔을 높이 올리는 동작이 특히 힘들어요.</div>
+        <div class="tip">시간적 여유만 주시면 돼요. 도움이 필요하면 호준이가 먼저 말할 수 있어요. 급하게 재촉하지 않는 것만으로 충분해요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-pink">🚌</div>
+      <div class="scene-body">
+        <h3>소풍 · 현장학습</h3>
+        <div class="situation">경사로, 비포장도로, 긴 도보 거리는 큰 벽이에요. 미리 알면 대비할 수 있는데, 당일 알면 막막해요.</div>
+        <div class="tip">장소가 정해지면 미리 알려주세요. 부모가 동선을 확인하고 준비할 수 있어요.</div>
+      </div>
+    </div>
+
+    <div class="scene-card fade-up">
+      <div class="scene-icon bg-teal">😮</div>
+      <div class="scene-body">
+        <h3>넘어지거나 주저앉을 때</h3>
+        <div class="situation">균형을 잃고 넘어질 수 있어요. 또 갑자기 다리에 힘이 풀리면서 그 자리에 주저앉는 경우도 있어요. 일반 아이들처럼 벌떡 일어나긴 어렵고, 근육에 의지해서 일어나는 게 힘들어요.</div>
+        <div class="tip">놀라지 않으셔도 돼요. <strong>겨드랑이 아래에 손을 넣어서 일으켜주세요.</strong> 손만 잡아당기면 호준이가 힘을 못 써서 일어나기 어려워요. 호준이 페이스에 맞춰 천천히 일어날 수 있게 기다려주세요.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑤ 긴급 상황 -->
+  <div class="section-label">
+    <span class="dot" style="background:#EF5350"></span>
+    긴급 상황에는 이렇게 해주세요
+  </div>
+
+  <div class="intro-card fade-up" style="border-left-color: #EF5350;">
+    <p style="font-weight:600;">🚨 화재 · 지진 등 대피 상황</p>
+    <p>휠체어로는 계단 이동이 불가해요. 미리 대피 계획을 세워주시고, 상황 발생 시 <strong>부모에게 바로 연락</strong> 부탁드려요.</p>
+    <p style="font-weight:600; margin-top:16px;">🤕 넘어지거나 다쳤을 때</p>
+    <p>호준이 페이스에 맞춰 천천히 일어날 수 있게 도와주세요. <strong>겨드랑이 아래에 손을 넣어서 일으켜주시면 됩니다.</strong> 손만 잡아당기면 힘을 못 써서 일어나기 어려워요.</p>
+    <p style="margin-top:16px; padding:12px 16px; background:#FFF8E1; border-radius:12px; font-size:0.85rem;">
+      ⚠️ 추가 긴급 대응 정보는 준비 중이에요. 궁금한 점은 부모에게 직접 연락해주세요.
+    </p>
+  </div>
+
+  <!-- ⑥ 이렇게 / 이건 말고 -->
+  <div class="section-label">
+    <span class="dot" style="background:var(--soft-green)"></span>
+    이렇게 해주시면 좋아요
+  </div>
+
+  <div class="do-dont fade-up">
+    <div class="do-card">
+      <h4>👍 이렇게</h4>
+      <ul>
+        <li>"같이 가자!"</li>
+        <li>"이거 내가 들어줄까?"</li>
+        <li>먼저 물어보고 도와주기</li>
+        <li>할 수 있는 역할 만들어주기</li>
+        <li>휠체어나 병이 궁금하면 차분히 물어봐주기</li>
+        <li>넘어지면 차분하게 도와주기</li>
+      </ul>
+    </div>
+    <div class="dont-card">
+      <h4>🙏 이건 말고</h4>
+      <ul>
+        <li>말 없이 휠체어 밀기</li>
+        <li>"불쌍하다" 표현</li>
+        <li>위험하다고 모든 활동 제외하기</li>
+        <li>말 없이 결정해버리기</li>
+        <li>지나친 걱정으로 아무것도 못하게 하기</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ⑦ 선생님 가이드 -->
+  <div class="section-label">
+    <span class="dot" style="background:var(--coral)"></span>
+    선생님이라면 이 3가지만
+  </div>
+
+  <div class="guide-box fade-up">
+    <h3>🍎 선생님 가이드</h3>
+    <div class="guide-item">
+      <div class="guide-num">1</div>
+      <div><strong>체육·현장학습은 미리 알려주세요.</strong> 장소와 활동 내용을 사전에 공유해주시면 부모가 대비할 수 있어요. 호준이도 자기 역할을 미리 생각할 수 있고요.</div>
+    </div>
+    <div class="guide-item">
+      <div class="guide-num">2</div>
+      <div><strong>배제하지 말고 역할을 주세요.</strong> 체육 시간에 빠지게 하는 것보다, 심판·기록·진행 역할을 맡기면 호준이도 함께한다고 느낄 수 있어요.</div>
+    </div>
+    <div class="guide-item">
+      <div class="guide-num">3</div>
+      <div><strong>교실 배치를 한번만 확인해주세요.</strong> 출입구 근처 자리, 장애인 화장실 위치 안내, 이동 동선 확보 — 학기 초에 한번만 챙겨주시면 한 학기가 편해져요.</div>
+    </div>
+  </div>
+
+  <!-- ⑧ 친구들에게 -->
+  <div class="section-label">
+    <span class="dot" style="background:var(--sky)"></span>
+    친구들에게는 이렇게 말해주세요
+  </div>
+
+  <div class="guide-box fade-up">
+    <h3>👫 친구들에게 설명할 때</h3>
+    <div class="guide-item">
+      <div class="guide-num" style="background:var(--sky);">💬</div>
+      <div>
+        <strong>"호준이는 다리 근육이 좀 약해서 휠체어를 타고 다녀.<br>머리도 좋고 게임도 잘하고 수다도 좋아해!"</strong>
+        <br><span style="font-size:0.82rem; color:#8D6E63;">이 정도면 충분해요. 아이들은 어른보다 자연스럽게 받아들여요.</span>
+      </div>
+    </div>
+    <div class="guide-item">
+      <div class="guide-num" style="background:var(--sky);">🤝</div>
+      <div>
+        <strong>혹시 "왜 휠체어 타?" 라고 물으면</strong><br>→ 궁금해하는 건 자연스러운 거예요! "태어날 때 근육이 좀 다르게 만들어진 거야. 옮는 거 아니고, 호준이는 그냥 다리 대신 휠체어를 쓰는 거야" 라고 설명해주시면 돼요.
+      </div>
+    </div>
+  </div>
+
+  <!-- ⑨ 아이 목소리 -->
+  <div class="voice-card fade-up">
+    <div class="big-quote">"</div>
+    <p>나도 할 수 있어!<br>도와주는 건 고마운데,<br>나도 해보고 싶은 건 해보게 해줘</p>
+    <div class="speaker">— 호준이가 자주 하는 말</div>
+  </div>
+
+  <div class="voice-card fade-up" style="background: linear-gradient(135deg, #FFF8E1, #FFF3E0);">
+    <div class="big-quote">"</div>
+    <p>같이 놀자고 해주는 게<br>제일 좋아</p>
+    <div class="speaker">— 호준이의 마음</div>
+  </div>
+
+  <!-- ⑩ FAQ -->
+  <div class="section-label">
+    <span class="dot" style="background:var(--lavender)"></span>
+    자주 묻는 질문
+  </div>
+
+  <div class="faq-list">
+    <div class="faq-item fade-up">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>나을 수 있는 병인가요?</span>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">현재로서는 완치 치료법은 없지만, 재활과 치료로 근력을 최대한 오래 유지하는 데 집중하고 있어요. 전 세계에서 연구가 활발히 진행 중이에요.</div>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>옮는 병인가요?</span>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">아니요. 유전자에 의한 질환이라 전혀 전염되지 않아요. 함께 놀고, 만지고, 같이 밥 먹어도 전혀 문제 없어요.</div>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>지능에도 영향이 있나요?</span>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">근육병은 근육에만 영향을 줘요. 학습 능력, 사고력, 감정은 다른 아이들과 동일해요. 호준이도 대화 좋아하고, 게임도 잘하고, 또래와 똑같이 생각하고 느껴요.</div>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>다른 아이들에게 어떻게 설명하면 될까요?</span>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">"호준이는 다리 근육이 좀 약해서 휠체어를 타고 다녀. 머리도 좋고 재미있는 애야!" 정도면 충분해요. 아이들은 어른보다 자연스럽게 받아들이는 경우가 많아요.</div>
+    </div>
+    <div class="faq-item fade-up">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        <span>긴급 상황에 어떻게 해야 하나요?</span>
+        <span class="arrow">▾</span>
+      </div>
+      <div class="faq-a">화재 대피 등 긴급 상황 시 휠체어로 계단 이동이 불가해요. 미리 대피 계획을 세워주시면 감사하겠습니다. 부모 연락처로 바로 연락 주세요.</div>
+    </div>
+  </div>
+
+  <!-- 익명 Q&A -->
+  <div class="section-label">
+    <span class="dot" style="background:var(--coral)"></span>
+    궁금한 거 있으면 편하게 물어보세요
+  </div>
+
+  <div class="qna-section fade-up">
+    <h3>💬 익명 질문함</h3>
+    <p class="qna-desc">이름 안 남겨도 돼요. 물어보기 어려웠던 거, 여기에 편하게 적어주세요.</p>
+    <textarea id="qna-input" placeholder="예: 체육 시간에 어떻게 참여시키면 좋을까요?"></textarea>
+    <br>
+    <button class="qna-btn" onclick="submitQuestion()">📮 보내기</button>
+    <p class="qna-notice">* 익명으로 전달되며, 부모에게만 전달됩니다</p>
+    <div class="qna-success" id="qna-success">✅ 전달되었습니다! 감사합니다 🤗</div>
+  </div>
+
+  <!-- 연락처 -->
+  <div class="intro-card fade-up" style="margin-top:32px; border-left-color: var(--sky);">
+    <p style="font-weight:500;">💬 연락처</p>
+    <p>
+      궁금한 점이 있거나 급한 상황이 생기면 언제든 연락 주세요.<br>
+      <a href="#" style="color:var(--coral); font-weight:600; text-decoration:none;">👉 카카오톡 오픈채팅 바로가기</a>
+      <br><span style="font-size:0.82rem; color:#8D6E63;">(오픈채팅 링크를 여기에 넣어주세요)</span>
+    </p>
+  </div>
+
+</div>
+
+<div class="footer">
+  <div class="heart">🧡</div>
+  <p>이 페이지를 읽어주셔서 감사해요.<br>호준이에게는 그것만으로도 큰 힘이 됩니다.</p>
+</div>
+
+<script>
+  function toggleFaq(el) {
+    el.parentElement.classList.toggle('open');
+  }
+  function submitQuestion() {
+    const input = document.getElementById('qna-input');
+    const success = document.getElementById('qna-success');
+    if (input.value.trim() === '') {
+      input.style.borderColor = '#FFAB91';
+      input.setAttribute('placeholder', '질문을 입력해주세요 :)');
+      return;
+    }
+    success.style.display = 'block';
+    input.value = '';
+    input.style.borderColor = '#A5D6A7';
+    setTimeout(() => {
+      success.style.display = 'none';
+      input.style.borderColor = '#FFE8D6';
+    }, 3000);
+  }
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
